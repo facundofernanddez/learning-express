@@ -2,8 +2,8 @@ import express from "express";
 
 const app = express();
 
-app.get("/products", (req, res) => {
-  res.end("lista de productos");
+app.get("/user", (req, res) => {
+  res.json({ name: "facundo", age: 26 });
 });
 
 app.post("/products", (req, res) => {
@@ -15,7 +15,7 @@ app.put("/products", (req, res) => {
 });
 
 app.delete("/products", (req, res) => {
-  res.end("eliminando producto");
+  res.sendStatus(204);
 });
 
 app.patch("/products", (req, res) => {
