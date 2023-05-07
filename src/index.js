@@ -2,8 +2,24 @@ import express from "express";
 
 const app = express();
 
-app.get("/", (req, res) => {
-  res.end("hello world");
+app.get("/products", (req, res) => {
+  res.end("lista de productos");
+});
+
+app.post("/products", (req, res) => {
+  res.end("creando productos");
+});
+
+app.put("/products", (req, res) => {
+  res.end("modificando producto");
+});
+
+app.delete("/products", (req, res) => {
+  res.end("eliminando producto");
+});
+
+app.patch("/products", (req, res) => {
+  res.end("modificando caracteristica del producto");
 });
 
 app.use((req, res) => {
