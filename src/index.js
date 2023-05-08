@@ -2,12 +2,15 @@ import express from "express";
 
 const app = express();
 
+app.use(express.json());
+
 app.get("/user", (req, res) => {
   res.json({ name: "facundo", age: 26 });
 });
 
-app.post("/products", (req, res) => {
-  res.end("creando productos");
+app.post("/user", (req, res) => {
+  console.log(req.body);
+  res.end("usuario creado");
 });
 
 app.put("/products", (req, res) => {
