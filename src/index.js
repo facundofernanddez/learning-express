@@ -8,6 +8,10 @@ app.get("/user", (req, res) => {
   res.json({ name: "facundo", age: 26 });
 });
 
+app.get("/user/:user", (req, res) => {
+  res.send(`Hola ${req.params.user}`);
+});
+
 app.post("/user", (req, res) => {
   console.log(req.body);
   res.end("usuario creado");
