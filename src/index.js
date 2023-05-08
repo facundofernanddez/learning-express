@@ -9,7 +9,11 @@ app.get("/user", (req, res) => {
 });
 
 app.get("/user/:user", (req, res) => {
-  res.send(`Hola ${req.params.user}`);
+  if (req.query.q === "javascript libros") {
+    res.send(`Libros de javascript`);
+  } else {
+    res.send(`Hola ${req.params.user}`);
+  }
 });
 
 app.post("/user", (req, res) => {
