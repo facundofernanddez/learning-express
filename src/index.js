@@ -8,6 +8,16 @@ app.get("/user", (req, res) => {
   res.json({ name: "facundo", age: 26 });
 });
 
+app.use((req, res, next) => {
+  console.log("paso por aqui");
+
+  next();
+});
+
+app.get("/profile", (req, res) => {
+  res.send("profile page");
+});
+
 app.get("/user/:user", (req, res) => {
   if (req.query.q === "javascript libros") {
     res.send(`Libros de javascript`);
