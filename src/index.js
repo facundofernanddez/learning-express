@@ -15,7 +15,11 @@ app.use((req, res, next) => {
 });
 
 app.use((req, res, next) => {
-  console.log("paso por aqui");
+  if (req.query.login === "facundofernanddez@gmail.com") {
+    next();
+  } else {
+    res.send("No autorizado");
+  }
 
   next();
 });
