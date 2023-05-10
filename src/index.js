@@ -1,8 +1,11 @@
 import express from "express";
+import morgan from "morgan";
 
 const app = express();
 
 app.use(express.json());
+
+app.use(morgan());
 
 app.get("/user", (req, res) => {
   res.json({ name: "facundo", age: 26 });
@@ -38,11 +41,6 @@ app.get("/user/:user", (req, res) => {
   } else {
     res.send(`Hola ${req.params.user}`);
   }
-});
-
-app.post("/user", (req, res) => {
-  console.log(req.body);
-  res.end("usuario creado");
 });
 
 app.put("/products", (req, res) => {
