@@ -3,7 +3,7 @@ import morgan from "morgan";
 
 const app = express();
 
-const products = [
+let products = [
   {
     id: 1,
     name: "laptop",
@@ -40,11 +40,32 @@ app.post("/products", (req, res) => {
   res.send(newProduct);
 });
 
-app.put("/products", (req, res) => {
+app.put("/products/:id", (req, res) => {
+  const newData = req.body;
+  const findedProduct = products.find((p) => p.id === parseInt(req.params.id));
+
+  if (!findedProduct) {
+    return res.status(404).send("Product not found");
+  }
+
+  products = products.map((p) =>
+    p.id === parseInt(req.params.id) ? { ...p, ...newData } : p
+  );
+
   res.send("actualizando productos");
 });
 
-app.delete("/products", (req, res) => {
+app.delete("/products/:id", (req, res) => {
+  const findedProduct = products.find((p) => p.id === parseInt(req.params.id));
+
+  if (!findedProduct) {
+    return res.status(404).send("Product not found");
+  }
+
+  products = products.filter((p) => p.id !== parseInt(req.params.id));
+
+  console.log(products);
+
   res.send("eliminando productos");
 });
 
