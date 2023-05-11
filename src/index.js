@@ -4,8 +4,9 @@ import morgan from "morgan";
 const app = express();
 
 app.use(express.json());
+app.use(morgan("dev"));
 
-app.use(morgan());
+app.set("appName", "Learning Express");
 
 app.get("/user", (req, res) => {
   res.json({ name: "facundo", age: 26 });
@@ -60,4 +61,4 @@ app.use((req, res) => {
 });
 
 app.listen(3000);
-console.log("Server listening on port 3000");
+console.log(`Server listening on port 3000 and ${app.get("appName")}`);
