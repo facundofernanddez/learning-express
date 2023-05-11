@@ -23,9 +23,21 @@ app.get("/products", (req, res) => {
   res.json(products);
 });
 
+app.get("/products/:id", (req, res) => {
+  const findedProduct = products.find((p) => p.id === parseInt(req.params.id));
+
+  if (!findedProduct) {
+    return res.status(404).send("Product not found");
+  }
+
+  console.log(findedProduct);
+  res.send(findedProduct);
+});
+
 app.post("/products", (req, res) => {
-  products.push({ id: products.length + 1, ...req.body });
-  res.send("creando productos");
+  const newProduct = { id: products.length + 1, ...req.body };
+  products.push(newProduct);
+  res.send(newProduct);
 });
 
 app.put("/products", (req, res) => {
@@ -34,10 +46,6 @@ app.put("/products", (req, res) => {
 
 app.delete("/products", (req, res) => {
   res.send("eliminando productos");
-});
-
-app.get("/products/:id", (req, res) => {
-  res.send("obteniendo un producto");
 });
 
 app.listen(3000);
