@@ -1,5 +1,6 @@
 import express from "express";
 import morgan from "morgan";
+import axios from "axios";
 
 import Home from "../routes/home.js";
 import Users from "../routes/users.js";
@@ -48,6 +49,14 @@ app.delete("/products", (req, res) => {
 
 app.patch("/products", (req, res) => {
   res.end("modificando caracteristica del producto");
+});
+
+app.get("/post", (req, res) => {
+  const posts = axios
+    .get("https://jsonplaceholder.typicode.com/posts")
+    .then((response) => {
+      res.send(response.data);
+    });
 });
 
 app.use((req, res) => {
