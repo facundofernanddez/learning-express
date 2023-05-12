@@ -1,6 +1,9 @@
 import express from "express";
 import morgan from "morgan";
 
+import Home from "../routes/home.js";
+import Users from "../routes/users.js";
+
 const app = express();
 
 app.use(express.json());
@@ -8,33 +11,24 @@ app.use(morgan("dev"));
 
 app.set("appName", "Learning Express");
 
-app.get("/user", (req, res) => {
-  res.json({ name: "facundo", age: 26 });
-});
-
 app.use((req, res, next) => {
   console.log("paso por aqui");
 
   next();
 });
 
-app.use((req, res, next) => {
-  if (req.query.login === "facundofernanddez@gmail.com") {
-    next();
-  } else {
-    res.send("No autorizado");
-  }
+// app.use((req, res, next) => {
+//   if (req.query.login === "facundofernanddez@gmail.com") {
+//     next();
+//   } else {
+//     res.send("No autorizado");
+//   }
 
-  next();
-});
+//   next();
+// });
 
-app.get("/profile", (req, res) => {
-  res.send("profile page");
-});
-
-app.get("/dashboard", (req, res) => {
-  res.send("dashboard");
-});
+app.use(Home);
+app.use(Users);
 
 app.get("/user/:user", (req, res) => {
   if (req.query.q === "javascript libros") {
